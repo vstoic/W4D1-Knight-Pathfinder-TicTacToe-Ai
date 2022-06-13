@@ -47,7 +47,6 @@ class KnightPathFinder
 
     def build_move_tree
         que = [@root_node]
-        
 
         until que.empty?
         
@@ -59,10 +58,25 @@ class KnightPathFinder
                 current_node.add_child(new_node)
                 que << new_node
             end
-            
         end
+    end
 
+    def find_path(end_pos)
+        end_node = @root_node.bfs(end_pos)
+        trace_path_back(end_node)
+    end
+
+    def trace_path_back(end_node)
+        parent_path = [end_node]
+        until parent_path[0] == @root_node
+            current_node = parent_path[0]
+            parent_path.unshift(current_node.parent)
+        end
+        parent_path.map { |node| node.value }
     end
 end
 
+p kpf = KnightPathFinder.new([0, 0])
+p kpf.find_path([7, 6]) # => [[0, 0], [1, 2], [2, 4], [3, 6], [5, 5], [7, 6]]
+p kpf.find_path([6, 2]) # => [[0, 0], [1, 2], [2, 0], [4, 1], [6, 2]]
 
