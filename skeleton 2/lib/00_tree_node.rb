@@ -4,7 +4,7 @@ class PolyTreeNode
         @children = []
         @value = value
     end
-
+   #this is a test
     attr_reader :parent, :children, :value
 
     def parent=(p_node)
